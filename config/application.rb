@@ -35,8 +35,5 @@ module ReactFitApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.middleware.use ActionDispatch::Cookies
-    config.action_dispatch.default_headers = {
-        'Access-Control-Allow-Origin' => 'https://react-fitness.herokuapp.com/'
-      }
   end
 end
