@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://react-fitness.herokuapp.com/'
+    origins 'http://react-fitness.herokuapp.com/'
 
     resource '*',
       headers: :any,
