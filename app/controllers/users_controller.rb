@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
   before_action :authenticate_token, except: [:login, :create]
   before_action :authorize_user, except: [:login, :create, :index]
+  before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
   def index
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      render json: @user
+      render json: @user, status: :userupdated
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -57,6 +57,10 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.select('first_name, last_name, email, username, id').find(params[:id])
+    end
+
+    def set_user_update
+      @user = User.find(params[:id])
     end
 
     def create_token(id, username)
