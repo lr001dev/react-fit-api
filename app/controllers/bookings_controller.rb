@@ -22,7 +22,7 @@ class BookingsController < ApplicationController
 
 
     if @booking.save
-      render json: @booking, status: :created
+      render json: @booking
     else
       render json: @booking.errors, status: :unprocessable_entity
     end
@@ -40,6 +40,7 @@ class BookingsController < ApplicationController
   # DELETE /bookings/1
   def destroy
     @booking.destroy
+    render(status: 204)
   end
 
   private

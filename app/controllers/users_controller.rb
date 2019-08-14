@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    booked_sessions = Booking.joins(:session).select('session_id as id, name, modality, length, trainer, img_url, description, booked_date').where("user_id = #{ @user.id }").order('booked_date ASC')
+    booked_sessions = Booking.joins(:session).select('session_id as s_id, bookings.id, name, modality, length, trainer, img_url, description, booked_date').where("user_id = #{ @user.id }").order('booked_date ASC')
     render json: { user: @user, bookings: booked_sessions }
   end
 
