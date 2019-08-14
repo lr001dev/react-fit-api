@@ -5,6 +5,9 @@ Rails.application.routes.draw do
       collection do
         post '/login', to: 'users#login'
       end
+      collection do
+        get '/check', to: 'users#check'
+      end
       resources :bookings, only: [:create, :destroy]
 
   end

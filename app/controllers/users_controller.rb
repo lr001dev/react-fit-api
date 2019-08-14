@@ -1,12 +1,18 @@
 class UsersController < ApplicationController
   before_action :authenticate_token, except: [:login, :create]
-  before_action :authorize_user, except: [:login, :create, :index]
+  before_action :authorize_user, except: [:login, :check, :create, :index]
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
   def index
     @users = User.select('first_name, last_name, email, username, id').all
     render json: @users
+  end
+
+  def check
+    if get_current_user.id
+      render json: { user: get_current_user.id }
+    end
   end
 
   # GET /users/1
