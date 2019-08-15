@@ -8,6 +8,9 @@ Rails.application.routes.draw do
       collection do
         get '/check', to: 'users#check'
       end
+      collection do
+        delete '/destroyCookie', to: 'users#destroyCookie'
+      end
       resources :bookings, only: [:create, :destroy]
 
   end

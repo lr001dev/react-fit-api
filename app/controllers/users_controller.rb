@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_token, except: [:login, :create]
-  before_action :authorize_user, except: [:login, :check, :create, :index]
+  before_action :authorize_user, except: [:login, :check, :destroyCookie, :create, :index]
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
@@ -15,6 +15,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroyCookie
+    cookies.delete(:jwt)
+  end
   # GET /users/1
   def show
     booked_sessions = Booking.joins(:session).select('session_id as s_id, bookings.id, name, modality, length, trainer, img_url, description, booked_date').where("user_id = #{ @user.id }").order('booked_date ASC')
